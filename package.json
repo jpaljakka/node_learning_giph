@@ -1,0 +1,11 @@
+{
+  "name": "node_learning_giph",
+  "version": "1.0.0",
+  "description": "HBC node practice",
+  "main": "\u001b[D\u001b[D\u001b[D\u001bserver.js)",
+  "scripts": {
+    "test": "npm run build:server"
+  },
+  "author": "",
+  "license": "ISC"
+}
