@@ -4,8 +4,8 @@
   "description": "HBC node practice",
   "main": "\u001b[D\u001b[D\u001b[D\u001bserver.js)",
   "scripts": {
-    "build": "tsc && node ./server.js",
-    "server": "npm run build && server src",
+    "build": "tsc && node /server.js",
+    "server": "npm run build && server /server",
     "build:server": "nodemon --watch src --exec npm run server"
   },
   "author": "",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "nedb": "^1.8.0",
     "node-fetch": "^2.6.0"
   }
 }
