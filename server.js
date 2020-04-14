@@ -16,31 +16,39 @@ app.get('/', function (req, res) {
 });
 
 app.post('/api', async (req, res) => {
-    console.log("request done")
+    console.log("POST - DONE")
     console.log(req.body)
-    const data = await req.body;
-    database.insert(data);
+    const response = await req.body;
+    database.insert(response);
     res.json({
-        status: "database push",
-        data: data
+        response: response
     });
 });
 
 app.get('/search/:query', async (req, res) => {
-    console.log("gifs done")
-    const search = req.params.query;
-    const api_url = 'http://api.giphy.com/v1/gifs/search?api_key=3kITzKZlZJpYRFgoHEeV2GRTTSrpH8Vh'
-    const fetch_url = await fetch(api_url + '&q=' + search)
-    const resp = await fetch_url.json()
-        .then((resp) => {
-            res.json(resp)
-        })
-        .catch((err) => {
-            console.log("error" + err)
-            return;
-        });
-});
+    console.log("GET - DONE")
+  
+        const search = req.params.query;
+        const api_key = '3kITzKZlZJpYRFgoHEeV2GRTTSrpH8Vh'
+        const gif_url = 'http://api.giphy.com/v1/gifs/search?api_key=' + api_key;
+        const fetch_gif = await fetch(gif_url + '&q=' + search)
+        const resp_gif = await fetch_gif.json();
+  
+        const sticker_url = 'http://api.giphy.com/v1/stickers/search?api_key=' + api_key;
+        const fetch_sticker = await fetch(sticker_url + '&q=' + search)
+        const resp_sticker = await fetch_sticker.json();
+        if(!resp_sticker) {
+            resp_sticker === null
+        }
+        const data = {
+            gif: resp_gif,
+            sticker: resp_sticker
+        }
 
+        res.json(data);
+   
+});
 app.listen(PORT, function () {
     console.log("listening port 5000");
 });
+
