@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.9.9",
     "nedb": "^1.8.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "typescript": "^3.8.3"
   }
 }
