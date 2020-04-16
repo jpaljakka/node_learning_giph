@@ -27,19 +27,12 @@ document.getElementById("search_button").addEventListener('click', async event =
         }
         return {
             ...acc,
-        url
+            [title]: url
             
             
         };
 
     }, {});
-    let stick = [sticker_url];
-    stick.forEach((img)=>{
-        console.log(img)
-    })
-  
-    
-console.log(response)
 
     const post = {
             date,

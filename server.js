@@ -4,10 +4,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const mongoose = require('mongoose');
 
-//database connection
+//database vonfig
 mongoose.connect('mongodb://localhost:27017/learning-mongodb', {useNewUrlParser: true});
 
-const db = mongoose.connection;  // mongoose connection 
+const db = mongoose.connection;  // mongoose error handling
 db.on('error', (err)=>{
     console.log('error has occurred with database ' + err);
 })
@@ -27,8 +27,6 @@ const gifSchema = new Schema({
 
 const Gif = mongoose.model('Gif', gifSchema);
 
-
-
 // endpoints starts here
 app.use("/public", express.static('./public/'));
 app.use(express.json({
@@ -40,6 +38,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+//post from front end, saving data to database
 app.post('/api', async (req, res) => {
     console.log("POST - DONE")
     console.log(req.body)
@@ -59,7 +58,7 @@ app.post('/api', async (req, res) => {
         response: response,
     });
 });
-
+//get request to giphy url
 app.get('/search/:query', async (req, res) => {
     console.log("GET - DONE")
   
@@ -72,7 +71,7 @@ app.get('/search/:query', async (req, res) => {
         const sticker_url = 'http://api.giphy.com/v1/stickers/search?api_key=' + api_key;
         const fetch_sticker = await fetch(sticker_url + '&q=' + search)
         const resp_sticker = await fetch_sticker.json();
-      
+ // ToDo use Promise.all here also i need to add more error handling to back end api request with .then and .catch      
         const data = {
             gif: resp_gif,
             sticker: resp_sticker
@@ -80,7 +79,7 @@ app.get('/search/:query', async (req, res) => {
         
 
     res.json(data);
-    console.log("ok")
+    console.log(data)
     
 
 });
